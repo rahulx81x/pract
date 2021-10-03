@@ -1,6 +1,6 @@
-import xml.etree.ElementTree as ET
 from urllib.request import urlopen
 import ssl
+import json
 
 # Ignoring SSL certificate errors
 ctx = ssl.create_default_context()
@@ -8,11 +8,10 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 url1 = input("url: ")
-xm = urlopen(url1, context=ctx).read()
-tree = ET.fromstring(xm)
+JS = urlopen(url1, context=ctx).read()
+js = json.loads(JS)
 
-sum = 0
-counts = tree.findall('.//count')
-for node in counts:
-    sum += int(node.text)
-print(sum)
+outp = 0
+for i in js['comments']:
+    outp += int(i['count'])
+print(outp)
