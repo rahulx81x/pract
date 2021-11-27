@@ -12,10 +12,8 @@ ctx.verify_mode = ssl.CERT_NONE
 url1 = "http://py4e-data.dr-chuck.net/comments_1152759.html"
 html = urlopen(url1, context=ctx).read()
 soup = BeautifulSoup(html, "html.parser")
-
 # get all of the span tags
 tags = soup('span')
-
 count = 0
 sum = 0
 for tag in tags:
